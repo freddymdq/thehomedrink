@@ -23,7 +23,7 @@ class  ProductManager{
             code,
             stock,
         }
-        // negamos el if !
+
         if(!Object.values(newProduct).includes(undefined)){
             ProductManager.id++;
             this.products.push({
