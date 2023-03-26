@@ -1,3 +1,6 @@
+
+
+
 class  ProductManager{
     constructor(){
         this.products = [];
@@ -5,7 +8,7 @@ class  ProductManager{
 
     static id = 0
 
-    // Validamos el Codigo
+// Validamos el Codigo
     addProduct (title, description, price, image, code, stock){
         for(let i = 0 ; i < this.products.length ; i++){
             if(this.products[i].code === code ){
@@ -41,7 +44,7 @@ class  ProductManager{
     existe (id) {
         return this.products.find((product) => product.id === id)
     }
-    
+
     // ternario
     getProductsById (id){
         !this.existe(id) ? console.log('Producto no encontrado') : console.log(this.existe(id));        
@@ -56,15 +59,17 @@ console.log(productos.getProducts())
 // Agregado Productos 
 productos.addProduct('SWING', "Whisky deluxe", 18750, 'image', 'cod001', 21 )
 productos.addProduct('J.WALKER', "Whisky red label", 8750, 'image', 'cod002',33 )
+// Arreglo con producto
+console.log(productos.getProducts())
 
 // No busca el producto (falta de datos.)
 productos.addProduct('ZACAPA', "Ron Destile deluxe reserve", 5750, 'image', 'cod004')
 
-// Arreglo con producto
-console.log(productos.getProducts())
+
 
 // Validacion de CODE duplicado.
  productos.addProduct('J.WALKER', "Whisky black label", 10750, 'image', 'cod002', 22 )
+
 
 // Buscamos por ID 
 productos.getProductsById(2)
