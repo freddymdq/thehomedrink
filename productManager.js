@@ -1,8 +1,8 @@
- import {promises as fs} from "fs"
+import {promises as fs} from "fs"
 
  export default class ProductManager {
     constructor(){
-        this.patch = "./file/products.txt"
+        this.patch = "./products.txt"
         this.products = [];
     };
 
@@ -20,7 +20,7 @@
 
     // Creo una funcion del readFile para no repetir tanto codigo.
     readFileProducts = async () => {
-            let readFileP = await fs.readFile(this.patch, "utf8")
+            let readFileP = await fs.readFile(this.patch, "utf-8")
                 // pasamos el string a un objeto
         return JSON.parse(readFileP)
     };
@@ -62,19 +62,20 @@
 
 
  // Productos agregados al FS
+
 products.addProduct("SWING","Delux whisky reserve ",23780,'https://i.ibb.co/3Bhwm06/img-swing.png', "cod001", 34)
 products.addProduct("J.WALKER","Red Label",13780,'https://i.ibb.co/VVyb8kt/jhonnie-walker-red-label.png', "cod002", 24)
 products.addProduct("J.WALKER","Black Label",14780,'https://i.ibb.co/RzYCMS5/jhonnie-walker.png', "cod003", 24) 
 
+ 
 
-
-// products.getProduct()
+//products.getProduct()
 
 // filtrado por ID el producto no existe
-//products.getProductById(4)
+products.getProductById(4)
 
 // filtrado por ID
-//products.getProductById(3)
+products.getProductById(3)
 
 // Update producto
 /* products.updateProduct({
@@ -85,7 +86,7 @@ products.addProduct("J.WALKER","Black Label",14780,'https://i.ibb.co/RzYCMS5/jho
     code: 'cod003',
     stock: 24,
     id: 3
-  })  */
-
+  }) 
+ */
 // borramos producto segun id 
 //products.deleteProduct(2) 

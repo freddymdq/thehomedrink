@@ -4,6 +4,7 @@
 class  ProductManager{
     constructor(){
         this.products = [];
+        this.path = './file/products.json'
     }
 
     static id = 0
