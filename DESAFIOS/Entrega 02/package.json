@@ -1,11 +1,10 @@
 {
-  "name": "entrega3mosquerafederico",
+  "name": "entrega2mosquerafederico",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +17,8 @@
     "url": "https://github.com/freddymdq/thehomedrink/issues"
   },
   "homepage": "https://github.com/freddymdq/thehomedrink#readme",
+  "description": "",
   "dependencies": {
     "express": "^4.18.2"
-  },
-  "description": "",
-  "devDependencies": {
-    "nodemon": "^2.0.22"
   }
 }
