@@ -2,7 +2,7 @@ import {promises as fs} from "fs"
 
  export default class ProductManager {
     constructor(){
-        this.path = "./products.txt"
+        this.path = "./products.json"
         this.products = [];
     };
 
@@ -66,11 +66,10 @@ import {promises as fs} from "fs"
     }
 
 }
-//const products = new ProductManager
+/* const products = new ProductManager
 
 
  // Productos agregados al FS
-/* 
 products.addProduct("SWING","Delux whisky reserve ",23780,'https://i.ibb.co/3Bhwm06/img-swing.png', "cod001", 34)
 products.addProduct("J.WALKER","Red Label",13780,'https://i.ibb.co/VVyb8kt/jhonnie-walker-red-label.png', "cod002", 24)
 products.addProduct("J.WALKER","Black Label",14780,'https://i.ibb.co/RzYCMS5/jhonnie-walker.png', "cod003", 24) 
@@ -85,13 +84,8 @@ products.addProduct("SMIRNOFF","Vodka Green Apple",1880,"https://i.ibb.co/mC9Dvx
 products.addProduct("KETEL ONE","Vodka LimitOne",1780,"https://i.ibb.co/hM1sRgP/Ketel-One-VODKA.png", "cod0012", 54)
 products.addProduct("CARDHU","Whisky Aged 20 Year",14780, "https://i.ibb.co/jwgDDPT/cardhu.png", "cod0013", 34)
  
-
-products.getProduct()
  */
-// filtrado por ID el producto no existe
-/* products.getProductById(4)
-
-// filtrado por ID
+/* products.getProduct()
 products.getProductById(3) */
 
 // Update producto
@@ -105,7 +99,6 @@ products.getProductById(3) */
     id: 3
   }) 
  */
-
 
 // borramos producto segun id 
 /* products.deleteProduct(2)  */
