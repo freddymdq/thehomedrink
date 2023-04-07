@@ -42,26 +42,6 @@ class CartManager {
 
     // Agregamos los productos al carrito
     addProductInCart = async (idCarts, idProd) => {
-        const newProduct = {
-            title, 
-            description, 
-            price, 
-            image, 
-            code,
-            stock,
-        }
-
-        if(!Object.values(newProduct).includes(undefined)){
-            ProductManager.id++;
-            this.products.push({
-                ...newProduct,
-                id:ProductManager.id
-            }); 
-        }else{
-            console.log("Todos los campos son necesarios")
-        }
-
-
         let cartsById = await this.existTheCarts(idCarts)
             if(!cartsById) return "El carrito no existe"
         let prodById = await allProduct.existTheProd(idProd)
