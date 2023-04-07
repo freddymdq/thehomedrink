@@ -1,11 +1,11 @@
 {
-  "name": "entrega3mosquerafederico",
+  "name": "proy.final.mosquerafederico",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/index.js"
+    "dev": "nodemon src/app.js",
+    "server": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/freddymdq/thehomedrink#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nanoid": "^4.0.2"
   },
   "description": "",
   "devDependencies": {

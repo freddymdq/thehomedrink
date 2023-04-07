@@ -74,6 +74,20 @@ import {promises as fs} from "fs"
 /* products.addProduct("SWING","Delux whisky reserve ",23780,'https://i.ibb.co/3Bhwm06/img-swing.png', "cod001", 34)
 products.addProduct("J.WALKER","Red Label",13780,'https://i.ibb.co/VVyb8kt/jhonnie-walker-red-label.png', "cod002", 24)
 products.addProduct("J.WALKER","Black Label",14780,'https://i.ibb.co/RzYCMS5/jhonnie-walker.png', "cod003", 24) 
+    
+let prod1 = {title: "SWING", description :"Delux whisky reserve ", price : 23780, img : "https://i.ibb.co/3Bhwm06/img-swing.png", code : "cod001",stock : 34} 
+    let prod2 = {title: "J.WALKER",description: "Red Label",price: 13780,img: "https://i.ibb.co/VVyb8kt/jhonnie-walker-red-label.png",code: "cod002",stock: 24}
+    let prod3 = {title:"J. WALKER", description: "Black Label", price:11780, stock:7, foto: 'https://i.ibb.co/RzYCMS5/jhonnie-walker.png',code: "cod003", stock:24}
+    let prod4 = {title: "SINGLETON",description: "Whisky reserve",price: 13780,img: "https://i.ibb.co/0MLB74Z/img-the-singleton.png",code: "cod004",stock: 25}
+    let prod5 = {title: "ZACAPA", description: "Delux Ron Destile",price: 18780,img: "https://i.ibb.co/0MWFj0D/img-zunca.png",code: "cod005",stock: 34}
+    let prod6 = {title: "SHERIDANS", description: "Aperitive", price: 11780, img: "https://i.ibb.co/G9rs3xn/img-sheridan.png",code: "cod006",stock: 24}
+    let prod7 = {title: "VAT-69", description: "Black Label",price: 2180,img: "https://i.ibb.co/N9j6h1c/VAT-69-Whisky.png",code: "cod007",stock: 54}
+    let prod8 = {title: "TANQUERRAY",description: "London Dry Gin", price: 2780,img: "https://i.ibb.co/hRpvrhr/tanqueray-london-dry-gin.png",code: "cod008", stock: 34}
+    let prod9 = {title: "TANQUERRAY",description: "Flor de Sevilla Dry Gin",price: 14780,img: "https://i.ibb.co/L9j6zzV/tanqueray-flor-de-sevilla-gin.png",code: "cod009",stock: 27}
+    let prod10 = {title: "BAILES",description: "Aperitive Caramel",price: 2380,img: "https://i.ibb.co/FK7X2sK/baileys.png",code: "cod0010",stock: 29}
+    let prod11 = {title: "SMIRNOFF",description: "Vodka Green Apple",price: 1880,img: "https://i.ibb.co/mC9Dvxv/smirnoff-apple.png",code: "cod0011",stock: 12}
+    let prod12 = {title: "KETEL ONE",description: "Vodka LimitOne",price: 1780, img: "https://i.ibb.co/hM1sRgP/Ketel-One-VODKA.png", code: "cod0012",stock: 54}
+    let prod13 = {title: "CARDHU",description: "Whisky Aged 20 Year",price: 14780,img: "https://i.ibb.co/jwgDDPT/cardhu.png",code: "cod0013",stock: 34,}
  */
  
 
