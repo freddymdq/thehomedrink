@@ -23,15 +23,35 @@ class ProductManager{
             return products.find(product => product.id === id)
     }
 
+
+
+
     // agrega producto
-    addProducts = async(product) => {
+    addProducts = async (product) => {
+        const oldProducts = await this.readProductsFile();
+        const isDuplicate = oldProducts.some((p) => p.title === product.title && p.code === product.code&& p.id !== product.id);
+            if (isDuplicate) {
+                return('Producto duplicado');
+            }
+        const requiredFields = ['title', 'description', 'price','stock', 'category', 'img', 'code' ];
+        const hasAllFields = requiredFields.every((field) => product[field]);
+            if (!hasAllFields) {
+                return('Faltan campos');
+        }
+        product.id = nanoid();
+        const allProducts = [...oldProducts, product];
+            console.log('Nuevos productos:', allProducts);
+            await this.writeProducts(allProducts);
+                return 'Producto Agregado';
+      }
+   /*  addProducts = async(product) => {
         let oldProd = await this.readProductsFile()
         product.id = nanoid()
         let allProducts = [...oldProd, product]
             await this.writeProducts(allProducts)
             return "Producto Agregado"
     }
-
+ */
     getProducts = async() => {
             return await this.readProductsFile()
     }
