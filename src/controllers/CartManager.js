@@ -44,24 +44,24 @@ class CartManager {
     // Agregamos los productos al carrito
     addProductInCart = async (idCart, idProd) => {
         const cart = await this.existTheCarts(idCart)
-        if (!cart) return "El carrito no existe"
+            if (!cart) return "El carrito no existe"
     
         const product = await allProduct.existTheProd(idProd)
-        if (!product) return "El producto no existe"
+            if (!product) return "El producto no existe"
     
         const allCarts = await this.readCartsFile()
         const filterCarts = allCarts.filter(cart => cart.id !== idCart)
     
         const existProdIndex = cart.products.findIndex(prod => prod.id === idProd);
-        if (existProdIndex !== -1) {
-            cart.products[existProdIndex].quantity++
-        } else {
+            if (existProdIndex !== -1) {
+                cart.products[existProdIndex].quantity++
+            } else {
             const prodTitle = (await allProduct.readProductsFile()).find(prod => prod.id === idProd)?.title;
-            cart.products.push({id: idProd, quantity: 1, title: prodTitle})
+                cart.products.push({id: idProd, quantity: 1, title: prodTitle})
         }
     
-        await this.writeCarts([cart, ...filterCarts])
-        return existProdIndex !== -1 ? "Producto sumado al carrito" : "Producto agregado al carrito"
+            await this.writeCarts([cart, ...filterCarts])
+            return existProdIndex !== -1 ? "Producto sumado al carrito" : "Producto agregado al carrito"
     }
 }
 
