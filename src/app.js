@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // enlazamos el router
-app.use("/api/products", ProdRouter)
+app.use("/api/product", ProdRouter)
 // enlazamos el cart
 app.use("/api/cart", CartRouter)
 

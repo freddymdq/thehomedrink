@@ -23,69 +23,61 @@ class ProductManager{
             return products.find(product => product.id === id)
     }
 
-
-
-
     // agrega producto
     addProducts = async (product) => {
-        const oldProducts = await this.readProductsFile();
-        const isDuplicate = oldProducts.some((p) => p.title === product.title && p.code === product.code&& p.id !== product.id);
-            if (isDuplicate) {
-                return('Producto duplicado');
+        const oldProducts = await this.readProductsFile()
+        const duplicate = oldProducts.some((p) => p.title === product.title && p.code === product.code&& p.id !== product.id)
+            if (duplicate) {
+                return('Producto duplicado')
             }
-        const requiredFields = ['title', 'description', 'price','stock', 'category', 'img', 'code' ];
-        const hasAllFields = requiredFields.every((field) => product[field]);
+        const requiredFields = ['title', 'description', 'price','stock', 'category', 'img', 'code' ]
+        const hasAllFields = requiredFields.every((field) => product[field])
             if (!hasAllFields) {
-                return('Faltan campos');
+                return('Faltan campos')
         }
         product.id = nanoid();
-        const allProducts = [...oldProducts, product];
-            console.log('Nuevos productos:', allProducts);
-            await this.writeProducts(allProducts);
-                return 'Producto Agregado';
-      }
-   /*  addProducts = async(product) => {
-        let oldProd = await this.readProductsFile()
-        product.id = nanoid()
-        let allProducts = [...oldProd, product]
+        const allProducts = [...oldProducts, product]
+            console.log('Nuevos productos:', allProducts)
             await this.writeProducts(allProducts)
-            return "Producto Agregado"
-    }
- */
+                return 'Producto Agregado'
+      }
+   
     getProducts = async() => {
             return await this.readProductsFile()
     }
 
     // busca el producto por id
     getProductsById = async(id) => {
-        
-        let prodById = await this.existTheProd(id)
+        const prodById = await this.existTheProd(id)
             if(!prodById) return "El id del producto no existe"
             return prodById
     }
 
     // borra el producto por id
-    deleteProd = async  (id) => {
-        let products = await this.readProductsFile()
-        let existProducts = products.some(product => product.id === id)
-            if(existProducts){
-                let prodFilter = products.filter(products => products.id != id) 
-                await this.writeProducts(prodFilter)
-                return "El Producto se elimino correctamente"
+    deleteProd = async (id) => {
+        const products = await this.readProductsFile()
+        const index = products.findIndex((product) => product.id === id) 
+            if (index === -1) {
+                return "El producto que desea eliminar no existe"
             }
-            return "El producto que desea eliminar no existe"
-    }
+        const deletedProduct = products.splice(index, 1)[0]
+            await this.writeProducts(products)
+                return `El producto "${deletedProduct.title}" se eliminó correctamente.`
+      };
 
     // actualiza los campos del producto segun su id
-    updateProducts = async( id, product) => {
-        let prodById = await this.existTheProd(id)
-            if(!prodById) return "El producto no existe"
-            await this.deleteProd(id)
-        let oldProd = await this.readProductsFile()    
-        let newProd = [{...product, id : id}, ...oldProd]
-            await this.writeProducts(newProd)
-            return "Producto Actualizado correctamente"
-    }
+    updateProducts = async (id, product) => {
+        const existProduct = await this.existTheProd(id)
+            if (!existProduct) {
+                return "El producto no existe"
+        }
+        const updatedProduct = { ...product, id }
+        const products = await this.readProductsFile()
+        const index = products.findIndex((p) => p.id === id)
+        products.splice(index, 1, updatedProduct)
+            await this.writeProducts(products)
+                return "Producto actualizado correctamente"
+      };
 }
 
 export default ProductManager
