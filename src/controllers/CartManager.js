@@ -51,7 +51,7 @@ class CartManager {
     
         const allCarts = await this.readCartsFile()
         const filterCarts = allCarts.filter(cart => cart.id !== idCart)
-    
+     
         const existProdIndex = cart.products.findIndex(prod => prod.id === idProd);
             if (existProdIndex !== -1) {
                 cart.products[existProdIndex].quantity++
