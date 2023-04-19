@@ -42,12 +42,12 @@ io.on('connection', async Socket => {
     });
     Socket.on('product', async newProd=> {
         let newProduct = await product.addProduct(newProd);
-        const products = await product.getProducts(newProduct);
+        const products = await product.getProducts();
             io.emit('productList', products)
     });
     Socket.on('product', async delProd =>{
         let pid = await product.deleteProduct(delProd);
-        const products = await product.getProducts(pid);
+        const products = await product.getProducts();
             io.emit('productList', products)
     })
 });

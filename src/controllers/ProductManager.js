@@ -46,8 +46,8 @@ export default class ProductManager {
         const productIndex = products.findIndex((product) => product.pid === pid)
             if (productIndex === -1) {
                 // la ruta del websocket me toma este return cuando se agrega un producto por lo tanto vamos a cambiarle el retun para la vista websocket
-                return console.log('El producto se agrego correctamente')
-                /* return console.error(`El producto con ID "${pid}" no existe.`) */
+              /*   return console.log('El producto se agrego correctamente') */
+                return console.error(`El producto con ID "${pid}" no existe.`)
             }
         products.splice(productIndex, 1);
             await fs.promises.writeFile(path, JSON.stringify(products, null, '\t'))
