@@ -1,46 +1,51 @@
-import {Router} from "express";
-import CartManager from "../controllers/CartManager.js"
+import { Router } from "express";
+import CartManager from "../controllers/cartManager.js";
 
 const CartRouter = Router()
-const cart = new CartManager()
+const cartManager = new CartManager()
 
-CartRouter.post("/", async(req, res)=>{
+CartRouter.get('/', async (req, res) => {
     try {
-        const result = await cart.addCarts()
-        res.send(result)
-    } catch (error) {
-        res.status(500).send({ error: "Error Interno" });
+        return res.status(200).send(await cartManager.getCarts());
+    }catch(error){
+        res.status(400).send({
+            status: "Error",
+            msg: `El total de carro no se puede ver`
+        });
     }
-})
-
-CartRouter.get('/', async(req, res)=>{
-    try {
-        const result = await cart.readCartsFile();
-        res.send(result)
-    } catch (error) {
-        res.status(500).send({ error: "Error Interno" })
+});
+CartRouter.get('/:cid', async (req, res) => {
+    try{
+        const cid = req.params.cid;
+        return res.status(200).send(await cartManager.getCartById(cid));
+    }catch (error) {
+        res.status(400).send({
+            status: "Error",
+            msg: `El carro por con id ${cid} no se puede ver`
+        });
     }
-})
-
-CartRouter.get('/:id', async(req, res)=>{
-    try {
-        const result = await cart.getCartsById(req.params.id)
-        res.send(result)
-    } catch (error) {
-        res.status(500).send({ error: "Error Interno" })
+});
+CartRouter.post('/', async (req, res) => {
+    try{
+        return res.status(200).send(await cartManager.addCart());
+    }catch (error) {
+        res.status(400).send({
+            status: "Error",
+            msg: `Elcarro no se puede visualizar`
+        });
     }
-})
-
+});
 CartRouter.post('/:cid/product/:pid', async (req, res) => {
-    try {
+    try{
         const idCart = req.params.cid
-        const idProd = req.params.pid
-        const result = await cart.addProductInCart(idCart, idProd)
-        res.send(result) 
-    } catch (error) {
-        res.status(500).send({ error: "Error Interno" })
+        const idProduct = req.params.pid
+        return res.status(200).send(await cartManager.addProductToCart(idCart, idProduct));
+    }catch(error) {
+        res.status(400).send({
+            status: "Error",
+            msg: `El producto solicitado no se puede agregar en el carro`
+        })
     }
 })
-
 export default CartRouter;
 

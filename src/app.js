@@ -1,52 +1,53 @@
 import express from "express";
-import { engine } from "express-handlebars";
-import { Server } from "socket.io"
-import * as path from "path";
-import __dirname from "./utils.js";
-import ProdRouter from "./router/product.routes.js";
+import handlebars from "express-handlebars";
+import { Server } from "socket.io";
+import ProductRouter from './router/product.routes.js';
 import CartRouter from "./router/cart.routes.js";
+import __dirname from "./utils.js";
 import ViewsRouter from "./router/views.routes.js";
+import ProductManager from "./controllers/ProductManager.js";
 
-
-const app = express()
-const PORT = 8080
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-// estructura handlebars
-app.engine("handlebars", engine())
-app.set("view engine", "handlebars")
-app.set("views", path.resolve(__dirname + "/views"))
-
-// archivos estaticos
-app.use("/", express.static(__dirname + "/public"))
-
-// Hb - Traemos todos productos
-app.use("/", ViewsRouter)
-// Hb - por id.
-app.use("/id", ViewsRouter)
-
-
-
-// enlazamos el router
-app.use("/api/product", ProdRouter)
-// enlazamos el cart
-app.use("/api/cart", CartRouter)
-
-// Levantamos servidor 
-const serv = app.listen(PORT, () => {
-    console.log(`El Servidor express funcionando correctamente en Puerto ${PORT}`)
+const PORT = 8080;
+const app = express();
+const server = app.listen(PORT, ()=>{
+    console.log('Servidor corriendo en puerto:'+ PORT);
 })
 
+// Estructura Handlebars
+app.engine('handlebars', handlebars.engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
 
-const socketServer = new Server(serv);
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+// Estaticos
+app.use(express.static(__dirname+'/public'));
 
-socketServer.on('connection', socket => {
-    console.log('Usuario conectado')
+// Vista de rutas
+app.use('/',ViewsRouter)
+app.use('/realTimeProducts',ViewsRouter)
+app.use('/api/products/', ProductRouter);
+app.use('/api/carts/', CartRouter);
 
-    socket.on("message", data => {
-        socketServer.emit('log', data)
+//WebSocket
+const io = new Server(server);
+const product = new ProductManager();
+
+io.on('connection', async Socket => {
+    console.log('Usuario Conectado');
+    const products = await product.getProducts();
+    io.emit('productList', products)
+    Socket.on('message', data => {
+            io.emit('log', data)
+    });
+    Socket.on('product', async newProd=> {
+        let newProduct = await product.addProduct(newProd);
+        const products = await product.getProducts(newProduct);
+            io.emit('productList', products)
+    });
+    Socket.on('product', async delProd =>{
+        let pid = await product.deleteProduct(delProd);
+        const products = await product.getProducts(pid);
+            io.emit('productList', products)
     })
-
-})
+});

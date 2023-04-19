@@ -1,37 +1,30 @@
-import { Router } from 'express'
-import ProductManager from '../controllers/ProductManager.js'
+import { Router } from "express";
+import ProductManager from "../controllers/ProductManager.js";
 
 const ViewsRouter = Router()
-const product = new ProductManager
+const product = new ProductManager()
 
 ViewsRouter.get("/", async (req, res) => {
     let allProducts = await product.getProducts()
-    res.render("home", {
+    res.render('home', {
         title: "The Drink Home",
         products: allProducts
     })
 })
 
-// traemos por id
-ViewsRouter.get("/:id", async (req, res) => {
-    let prod = await product.getProductsById(req.params.id)
-    res.render("prod", {
+ViewsRouter.get('/realTimeProducts', async (req, res) => {
+try {
+    let allProducts = await product.getProducts()
+    res.render('realTimeProducts', {
         title: "The Drink Home",
-        product: prod
-    })
-})
-
-/* // eliminamos por id
-ViewsRouter.delete("/:id", async (req, res) =>{
-    const id = req.params.id
-    try {
-        const deletedProduct = await product.deleteProd(id)
-        res.send(deletedProduct)
-    } catch (error) {
-        res.status(500).send({ error: "Internal server error" })
-    }
-}) */
+        allProducts})
+} catch (error) {
+    res.status(400).send({
+    status: "Error",
+    msg: `No se pueden visualizar algunos productos`
+    });
+}
+});
 
 
-
-export default ViewsRouter
+export default ViewsRouter;

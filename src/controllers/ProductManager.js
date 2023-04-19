@@ -1,83 +1,79 @@
-import {promises as fs} from 'fs';
-import { nanoid } from 'nanoid';
+import fs from 'fs';
 
-class ProductManager{
-    constructor(){
-        this.path = "./src/models/products.json"
-    }
+const path ='./src/models/products.json';
 
-    // lee el json
-    readProductsFile = async () => {
-        let products = await fs.readFile(this.path, "utf-8")
-            return JSON.parse(products)
-    }
-
-    // escribe en el json
-    writeProducts = async (product) => {
-            await fs.writeFile(this.path, JSON.stringify(product))
-    }
-
-    // existe el producto ?
-    existTheProd = async (id) => {
-        let products = await this.readProductsFile()
-            return products.find(product => product.id === id)
-    }
-
-    // agrega producto
-    addProducts = async (product) => {
-        const oldProducts = await this.readProductsFile()
-        const duplicate = oldProducts.some((p) => p.title === product.title && p.code === product.code&& p.id !== product.id)
-            if (duplicate) {
-                return('Producto duplicado')
-            }
-        const requiredFields = ['title', 'description', 'price','stock', 'category', 'img', 'code' ]
-        const hasAllFields = requiredFields.every((field) => product[field])
-            if (!hasAllFields) {
-                return('Faltan campos')
+export default class ProductManager {
+    getProducts = async ()=>{
+        if(fs.existsSync(path)){
+            const data = await fs.promises.readFile(path, 'utf-8')
+            const products = JSON.parse(data)
+            return products;
+        }else{
+            return [];
         }
-        product.id = nanoid();
-        const allProducts = [...oldProducts, product]
-            console.log('Nuevos productos:', allProducts)
-            await this.writeProducts(allProducts)
-                return 'Producto Agregado'
-      }
-   
-    getProducts = async() => {
-            return await this.readProductsFile()
     }
-
-    // busca el producto por id
-    getProductsById = async(id) => {
-        const prodById = await this.existTheProd(id)
-            if(!prodById) return "El id del producto no existe"
-            return prodById
-    }
-
-    // borra el producto por id
-    deleteProd = async (id) => {
-        const products = await this.readProductsFile()
-        const index = products.findIndex((product) => product.id === id) 
-            if (index === -1) {
-                return "El producto que desea eliminar no existe"
-            }
-        const deletedProduct = products.splice(index, 1)[0]
-            await this.writeProducts(products)
-                return `El producto "${deletedProduct.title}" se eliminó correctamente.`
-      };
-
-    // actualiza los campos del producto segun su id
-    updateProducts = async (id, product) => {
-        const existProduct = await this.existTheProd(id)
-            if (!existProduct) {
-                return "El producto no existe"
+    addProduct = async ({ title, description, price, img, code, stock }) => {
+        const products = await this.getProducts()
+        if (products.some((product) => product.code === code)) {
+            return console.error(`El código "${code}" ya está en uso por otro producto.`)
         }
-        const updatedProduct = { ...product, id }
-        const products = await this.readProductsFile()
-        const index = products.findIndex((p) => p.id === id)
-        products.splice(index, 1, updatedProduct)
-            await this.writeProducts(products)
-                return "Producto actualizado correctamente"
-      };
+        const newProduct = {
+            pid: "PROD" + (products.length + 1),title, description, price, img, status: true,code, stock,
+        };
+        const fieldNames = Object.keys(newProduct)
+        for (const fieldName of fieldNames) {
+            if (!newProduct[fieldName]) {
+                return console.error(`El campo "${fieldName}" es requerido.`)
+            }
+        }
+        products.push(newProduct);
+            await fs.promises.writeFile(path, JSON.stringify(products, null, '\t'))
+                return products
+        }
+    getProductById = async (pid) => {
+        const products = await this.getProducts()
+        const product = products.filter((product) => {
+            return product.pid == pid
+        });
+            if (product.length === 0) {
+                return null
+        }
+        return product
+        }
+
+    deleteProduct = async (pid) => {
+        const products = await this.getProducts();
+        const productIndex = products.findIndex((product) => product.pid === pid)
+            if (productIndex === -1) {
+                // la ruta del websocket me toma este return cuando se agrega un producto por lo tanto vamos a cambiarle el retun para la vista websocket
+                return console.log('El producto se agrego correctamente')
+                /* return console.error(`El producto con ID "${pid}" no existe.`) */
+            }
+        products.splice(productIndex, 1);
+            await fs.promises.writeFile(path, JSON.stringify(products, null, '\t'))
+                return products;
+        };
+
+    updateProduct = async (pid, updates) => {
+        const products = await this.getProducts();
+        const productIndex = products.findIndex((product) => product.pid === pid)
+            if (productIndex === -1) {
+                return console.error(`El producto con ID "${pid}" no existe.`)
+        }
+            if (updates.code && updates.code !== products[productIndex].code) {
+                if (products.some((product) => product.code === updates.code)) {
+                    return console.error(`El código "${updates.code}" ya está en uso por otro producto.`);
+            }
+        }
+        const updatedProduct = {...products[productIndex],...updates, pid,}
+        const fieldNames = Object.keys(updatedProduct)
+            for (const fieldName of fieldNames) {
+                if (!updatedProduct[fieldName]) {
+                    return console.error(`El campo "${fieldName}" es requerido.`)
+            }
+        }
+        products[productIndex] = updatedProduct
+            await fs.promises.writeFile(path, JSON.stringify(products, null, '\t'))
+                return updatedProduct
+    };
 }
-
-export default ProductManager
