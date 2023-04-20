@@ -29,25 +29,27 @@ app.use('/realTimeProducts',ViewsRouter)
 app.use('/api/products/', ProductRouter);
 app.use('/api/carts/', CartRouter);
 
-//WebSocket
+//Web Socket
 const io = new Server(server);
-const product = new ProductManager();
+const productManager = new ProductManager();
 
 io.on('connection', async Socket => {
     console.log('Usuario Conectado');
-    const products = await product.getProducts();
+    const products = await productManager.getProducts();
     io.emit('productList', products)
     Socket.on('message', data => {
             io.emit('log', data)
     });
     Socket.on('product', async newProd=> {
-        let newProduct = await product.addProduct(newProd);
-        const products = await product.getProducts();
+        let newProduct = await productManager.addProduct(newProd);
+        const products = await productManager.getProducts();
             io.emit('productList', products)
     });
-    Socket.on('product', async delProd =>{
-        let pid = await product.deleteProduct(delProd);
-        const products = await product.getProducts();
+    
+    // aca tenia el error llamaba al product otra vez
+    Socket.on('deleteProduct', async delProd =>{
+        let pid = await productManager.deleteProduct(delProd);
+        const products = await productManager.getProducts();
             io.emit('productList', products)
     })
 });
