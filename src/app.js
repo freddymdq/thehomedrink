@@ -1,65 +1,67 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import { Server } from "socket.io";
-import ProductRouter from './router/product.routes.js';
-import CartRouter from "./router/cart.routes.js";
-import __dirname from "./utils.js";
-import ViewsRouter from "./router/views.routes.js";
-import ProductManager from "./controllers/ProductManager.js";
 import mongoose from "mongoose";
+import __dirname from "./utils.js";
+import ProductManager from "./controllers/ProductManager.js";
 import routerP from "./router/products.routes.js";
+import viewsRouter from "./router/views.routes.js";
+import chatRouter from "./router/chat.routes.js"
+import cartRouter from "./router/cart.routes.js"
+import productRouter from "./router/product.routes.js"
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const app = express();
-const MONGO = 'mongodb+srv://freddymdq:federico@cluster0.wm7ahcr.mongodb.net/?retryWrites=true&w=majority'
-const connect = mongoose.connect(MONGO);
 const server = app.listen(PORT, ()=>{
-    console.log('Servidor corriendo en puerto:'+ PORT);
+    console.log('Servidor funcionando en el puerto: '+PORT);
 })
 
-
-app.use('/routerP', routerP)
-
-// Estructura Handlebars
-app.engine('handlebars', handlebars.engine());
-app.set('views', __dirname + '/views');
-app.set('view engine', 'handlebars');
+const MONGO = 'mongodb+srv://freddymdq:federico@cluster0.wm7ahcr.mongodb.net/?retryWrites=true&w=majority'
+const connect = mongoose.connect(MONGO);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // Estaticos
 app.use(express.static(__dirname+'/public'));
+// Handlebars
+app.engine('handlebars', handlebars.engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
 
-// Vista de rutas
-app.use('/',ViewsRouter)
-app.use('/realTimeProducts',ViewsRouter)
-app.use('/api/products/', ProductRouter);
-app.use('/api/carts/', CartRouter);
+// routes
+app.use('/api/prod', routerP)
+app.use('/', viewsRouter)
+app.use('/realTimeProducts', viewsRouter)
+app.use('/api/chat', chatRouter)
+app.use('/api/products/', productRouter);
+app.use('/api/carts/', cartRouter);
 
-
-//Web Socket
 const io = new Server(server);
 const productManager = new ProductManager();
+const messages = [];
 
 io.on('connection', async Socket => {
-    console.log('Usuario Conectado');
+    console.log('socket connected');
     const products = await productManager.getProducts();
-    io.emit('productList', products)
+    io.emit('productList', products);
     Socket.on('message', data => {
-            io.emit('log', data)
+        io.emit('log', data);
     });
-    Socket.on('product', async newProd=> {
+    Socket.on('productAdd', async newProd=> {
         let newProduct = await productManager.addProduct(newProd);
         const products = await productManager.getProducts();
-            io.emit('productList', products)
-            
+        io.emit('productList', products);
     });
-    
-    // aca tenia el error llamaba al product otra vez
-    Socket.on('deleteProduct', async delProd =>{
+    Socket.on('productDeleted', async delProd =>{
         let pid = await productManager.deleteProduct(delProd);
         const products = await productManager.getProducts();
-            io.emit('productList', products)
-           
+        io.emit('productList', products);
+    });
+    Socket.on('message', data=>{
+        messages.push(data);
+        io.emit('messageLogs', messages)
+    })
+    Socket.on('authenticated', (data) =>{      
+        Socket.broadcast.emit('newUserConnected', data)
     })
 });

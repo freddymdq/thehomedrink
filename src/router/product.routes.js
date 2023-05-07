@@ -1,41 +1,45 @@
 import { Router } from "express";
 import ProductManager from "../controllers/ProductManager.js";
+import AccesManager from "../controllers/AccesManager.js";
 
-const ProductRouter = Router()
-const product = new ProductManager()
+const router = Router();
+const productManager = new ProductManager();
+const accesManager = new AccesManager()
 
-ProductRouter.get('/', async (req, res)=>{
+router.get('/', async (req, res)=>{
     try{
-        const products = await product.getProducts()
-        const limit = parseInt(req.query.limit)
+        const products = await productManager.getProductsaccesManager.createRecord('GET PRODUCTS');
+        const limit = parseInt(req.query.limit);
         if (limit){
-            const productNumber = products.slice(0, limit)
-            return res.status(200).send(productNumber)
+            const productNumber = products.slice(0, limit);
+            return res.status(200).send(productNumber);
         }else{
-            return res.status(200).send(products)
+            return res.status(200).send(products);
         }
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `No se pueden visualizar los productos.`
+            msg: `Los productos solicitados no se pueden visualizar.`
         });
     }
 });
-ProductRouter.get('/:pid', async (req, res)=>{
+router.get('/:pid', async (req, res)=>{
     try{
-        const pid = req.params.pid
-        res.status(200).send(await product.getProductById(pid))
+        await accesManager.createRecord('GET PRODUCT BY ID');
+        const pid = req.params.pid;
+        res.status(200).send(await productManager.getProductById(pid));
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `El producto con ID: ${pid} no existe`
+            msg: `El producto con ID: ${pid} no existe o no se pudo encontrar.`
         });
     }
 });
-ProductRouter.post('/' , async (req, res)=>{
+router.post('/' , async (req, res)=>{
     try{
-        const { title, description, price, img, code, stock } = req.body
-        return res.status(200).send(await product.addProduct({ title, description, price, img, code, stock }))
+        await accesManager.createRecord('POST PRODUCTS');
+        const { title, description, price, img, code, stock } = req.body;
+        return res.status(200).send(await productManager.addProduct({ title, description, price, thumbnail, code, stock }));
     }catch (error){
         res.status(400).send({
             status: "Error",
@@ -43,34 +47,36 @@ ProductRouter.post('/' , async (req, res)=>{
         });
     }
 });
-ProductRouter.delete('/:pid', async (req, res) => {
+router.delete('/:pid', async (req, res) => {
     try {
-    const pid = req.params.pid
-    const product = await product.getProductById(pid);
-    if (product.length === 0) {
-        return res.status(400).send({
-        status: "Error",
-        msg: `El producto con ID: ${pid} no se puede encontrar.`
+        await accesManager.createRecord('DELETE PRODUCT');
+        const pid = req.params.pid;
+        const product = await productManager.getProductById(pid);
+        if (product.length === 0) {
+            return res.status(400).send({
+            status: "Error",
+            msg: `El producto con ID: ${pid} no existe o no se pudo encontrar.`
         });
     }
-    return res.status(200).send(await product.deleteProduct(pid));
+    return res.status(200).send(await productManager.deleteProduct(pid));
     } catch (error) {
     res.status(400).send({
         status: "Error",
-        msg: `El producto con ID: ${pid} no se puede eliminar.`
+        msg: `El producto con ID: ${pid} no se ha podido eliminar.`
     });
     }
 });
-ProductRouter.put('/:pid', async (req, res)=>{
+router.put('/:pid', async (req, res)=>{
     try{
-        const pid = req.params.pid
-        const updates = req.body
-        res.status(200).send(await product.updateProduct(pid, updates))
+        await accesManager.createRecord('PUT');
+        const pid = req.params.pid;
+        const updates = req.body;
+        res.status(200).send(await productManager.updateProduct(pid, updates));
     }catch (error){
         res.status(400).send({
             status: "Error",
-            msg: `El producto con ID: ${pid} no se puede actualizar.`
+            msg: `El producto con ID: ${pid} no se ha podido actualizar.`
         });
     }
 });
-export default ProductRouter;
+export default router;

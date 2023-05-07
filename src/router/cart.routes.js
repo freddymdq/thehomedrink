@@ -1,51 +1,56 @@
 import { Router } from "express";
-import CartManager from "../controllers/cartManager.js";
+import CartManager from "../controllers/CartManager.js";
+import AccesManager from "../controllers/AccesManager.js";
 
-const CartRouter = Router()
-const cartManager = new CartManager()
+const router = Router();
+const cartManager = new CartManager();
+const accesManager = new AccesManager();
 
-CartRouter.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
+        await accesManager.createRecord('GET CARTS');
         return res.status(200).send(await cartManager.getCarts());
     }catch(error){
         res.status(400).send({
             status: "Error",
-            msg: `El total de carro no se puede ver`
+            msg: `No se puede mostrar el total de los carritos`
         });
     }
 });
-CartRouter.get('/:cid', async (req, res) => {
+router.get('/:cid', async (req, res) => {
     try{
+        await accesManager.createRecord('GET CARTS BY ID');
         const cid = req.params.cid;
         return res.status(200).send(await cartManager.getCartById(cid));
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `El carro por con id ${cid} no se puede ver`
+            msg: `El carro seleccionado no se puede mostrar`
         });
     }
 });
-CartRouter.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
+        await accesManager.createRecord('POST CART');
         return res.status(200).send(await cartManager.addCart());
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `Elcarro no se puede visualizar`
+            msg: `El carro solicitado no se puede ver`
         });
     }
 });
-CartRouter.post('/:cid/product/:pid', async (req, res) => {
+router.post('/:cid/product/:pid', async (req, res) => {
     try{
-        const idCart = req.params.cid
-        const idProduct = req.params.pid
+        await accesManager.createRecord('POST PRODUCT IN CART');
+        const idCart = req.params.cid;
+        const idProduct = req.params.pid;
         return res.status(200).send(await cartManager.addProductToCart(idCart, idProduct));
     }catch(error) {
         res.status(400).send({
             status: "Error",
-            msg: `El producto solicitado no se puede agregar en el carro`
-        })
+            msg: `El producto solicitado no se puede agregar en el carro indicado.`
+        });
     }
-})
-export default CartRouter;
-
+});
+export default router;
