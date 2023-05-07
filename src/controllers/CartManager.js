@@ -23,8 +23,8 @@ export default class CartManager {
             products: []
         };
         const addCart = [...carts, newCart]
-        await fs.promises.writeFile(path, JSON.stringify(addCart, null, '\t'))
-        return newCart
+            await fs.promises.writeFile(path, JSON.stringify(addCart, null, '\t'))
+                return newCart
     };
 
     getCartById = async (cid)=>{
@@ -34,8 +34,8 @@ export default class CartManager {
         });
         if (cart.length === 0) {
             return null
-        }
-        return cart;
+            }
+            return cart;
     };
     
     addProductToCart = async (cid, pid) => {

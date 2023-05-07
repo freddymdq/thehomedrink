@@ -6,12 +6,19 @@ import CartRouter from "./router/cart.routes.js";
 import __dirname from "./utils.js";
 import ViewsRouter from "./router/views.routes.js";
 import ProductManager from "./controllers/ProductManager.js";
+import mongoose from "mongoose";
+import routerP from "./router/products.routes.js";
 
 const PORT = 8080;
 const app = express();
+const MONGO = 'mongodb+srv://freddymdq:federico@cluster0.wm7ahcr.mongodb.net/?retryWrites=true&w=majority'
+const connect = mongoose.connect(MONGO);
 const server = app.listen(PORT, ()=>{
     console.log('Servidor corriendo en puerto:'+ PORT);
 })
+
+
+app.use('/routerP', routerP)
 
 // Estructura Handlebars
 app.engine('handlebars', handlebars.engine());
@@ -29,6 +36,7 @@ app.use('/realTimeProducts',ViewsRouter)
 app.use('/api/products/', ProductRouter);
 app.use('/api/carts/', CartRouter);
 
+
 //Web Socket
 const io = new Server(server);
 const productManager = new ProductManager();
@@ -44,6 +52,7 @@ io.on('connection', async Socket => {
         let newProduct = await productManager.addProduct(newProd);
         const products = await productManager.getProducts();
             io.emit('productList', products)
+            
     });
     
     // aca tenia el error llamaba al product otra vez
@@ -51,5 +60,6 @@ io.on('connection', async Socket => {
         let pid = await productManager.deleteProduct(delProd);
         const products = await productManager.getProducts();
             io.emit('productList', products)
+           
     })
 });
