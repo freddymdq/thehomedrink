@@ -1,0 +1,42 @@
+
+Fecha: 8/5/2023 - Hora: 10:18:13 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 10:29:47 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 11:01:30 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 11:42:05 - Metodo: NEW PRODUCT CREATED
+Fecha: 8/5/2023 - Hora: 11:42:30 - Metodo: DELETE PRODUCT
+Fecha: 8/5/2023 - Hora: 11:55:17 - Metodo: DELETE PRODUCT
+Fecha: 8/5/2023 - Hora: 11:55:53 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 11:56:53 - Metodo: GET PRODUCT BY ID
+Fecha: 8/5/2023 - Hora: 11:57:55 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:12:51 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:13:27 - Metodo: REMOVED PRODUCT
+Fecha: 8/5/2023 - Hora: 12:13:39 - Metodo: GET PRODUCT BY ID
+Fecha: 8/5/2023 - Hora: 12:13:46 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:13:55 - Metodo: NEW PRODUCT CREATED
+Fecha: 8/5/2023 - Hora: 12:14:18 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:14:37 - Metodo: REMOVED PRODUCT
+Fecha: 8/5/2023 - Hora: 12:15:29 - Metodo: GET PRODUCT BY ID
+Fecha: 8/5/2023 - Hora: 12:15:31 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:15:41 - Metodo: NEW PRODUCT CREATED
+Fecha: 8/5/2023 - Hora: 12:16:36 - Metodo: GET PRODUCT BY ID
+Fecha: 8/5/2023 - Hora: 12:16:44 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:17:17 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:17:35 - Metodo: REMOVED PRODUCT
+Fecha: 8/5/2023 - Hora: 12:18:58 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:19:04 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 12:19:12 - Metodo: NEW PRODUCT CREATED
+Fecha: 8/5/2023 - Hora: 12:19:24 - Metodo: UPDATE PRODUCT
+Fecha: 8/5/2023 - Hora: 12:19:35 - Metodo: GET PRODUCT BY ID
+Fecha: 8/5/2023 - Hora: 12:20:13 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 13:39:22 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 13:44:38 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 13:52:05 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 13:58:40 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:00:26 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:00:39 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:01:07 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:01:23 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:02:11 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:05:35 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 14:16:31 - Metodo: GET PRODUCTS
+Fecha: 8/5/2023 - Hora: 15:58:03 - Metodo: GET PRODUCTS

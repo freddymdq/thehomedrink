@@ -1,45 +1,49 @@
 import { Router } from "express";
-import ProductManager from "../controllers/ProductManager.js";
-import AccesManager from "../controllers/AccesManager.js";
+import AccesManager from "../Dao/controllers/AccesManager.js";
+import productModel from "../Dao/models/products.model.js";
 
+
+const accesManager = new AccesManager();
 const router = Router();
-const productManager = new ProductManager();
-const accesManager = new AccesManager()
+
 
 router.get('/', async (req, res)=>{
     try{
-        const products = await productManager.getProductsaccesManager.createRecord('GET PRODUCTS');
-        const limit = parseInt(req.query.limit);
-        if (limit){
-            const productNumber = products.slice(0, limit);
-            return res.status(200).send(productNumber);
-        }else{
-            return res.status(200).send(products);
-        }
+        await accesManager.createRecord('GET PRODUCTS');
+        const result = await productModel.find();
+        res.status(200).send({result});
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `Los productos solicitados no se pueden visualizar.`
+            msg: `No se pueden ver los productos`
         });
     }
 });
-router.get('/:pid', async (req, res)=>{
+router.get('/:id', async (req, res)=>{
     try{
+       
         await accesManager.createRecord('GET PRODUCT BY ID');
-        const pid = req.params.pid;
-        res.status(200).send(await productManager.getProductById(pid));
+        const id = req.params.pid;
+        const result = await productModel.find({_id:id});
+        res.status(200).send({result});
     }catch (error) {
         res.status(400).send({
             status: "Error",
-            msg: `El producto con ID: ${pid} no existe o no se pudo encontrar.`
+            msg: `El producto no existe`
         });
     }
 });
 router.post('/' , async (req, res)=>{
     try{
-        await accesManager.createRecord('POST PRODUCTS');
-        const { title, description, price, img, code, stock } = req.body;
-        return res.status(200).send(await productManager.addProduct({ title, description, price, thumbnail, code, stock }));
+        
+        await accesManager.createRecord('NEW PRODUCT CREATED');
+        const {title, description, price,category, img, code, stock} = req.body;
+        if (!title || !description || !price || !category || !img || !code || !stock){
+            return res.status(400).send({error: 'Datos incompletos'});
+        }
+        const product = {title, description, price,category, img, code, stock};
+        const result = await productModel.create(product);
+        res.status(200).send({result});
     }catch (error){
         res.status(400).send({
             status: "Error",
@@ -47,36 +51,34 @@ router.post('/' , async (req, res)=>{
         });
     }
 });
-router.delete('/:pid', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        await accesManager.createRecord('DELETE PRODUCT');
-        const pid = req.params.pid;
-        const product = await productManager.getProductById(pid);
-        if (product.length === 0) {
-            return res.status(400).send({
+       
+        await accesManager.createRecord('REMOVED PRODUCT');
+        const id = req.params.id;
+        const result = await productModel.deleteOne({_id:id});
+        res.status(200).send({result});
+    } catch (error) {
+        res.status(400).send({
             status: "Error",
-            msg: `El producto con ID: ${pid} no existe o no se pudo encontrar.`
+            msg: `El producto no se puede eliminar`
         });
     }
-    return res.status(200).send(await productManager.deleteProduct(pid));
-    } catch (error) {
-    res.status(400).send({
-        status: "Error",
-        msg: `El producto con ID: ${pid} no se ha podido eliminar.`
-    });
-    }
 });
-router.put('/:pid', async (req, res)=>{
+router.put('/:id', async (req, res)=>{
     try{
-        await accesManager.createRecord('PUT');
-        const pid = req.params.pid;
-        const updates = req.body;
-        res.status(200).send(await productManager.updateProduct(pid, updates));
+        
+        await accesManager.createRecord('UPDATE PRODUCT');
+        const id = req.params.id;
+        const updateProduct = req.body;
+        const result = await productModel.updateOne({_id: id}, {$set: updateProduct});
+        res.status(200).send({result});
     }catch (error){
         res.status(400).send({
             status: "Error",
-            msg: `El producto con ID: ${pid} no se ha podido actualizar.`
+            msg: `El producto no se puede actualizar.`
         });
     }
 });
 export default router;
+

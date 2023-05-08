@@ -1,7 +1,7 @@
 import fs from 'fs';
-import ProductManager from "../controllers/ProductManager.js";
+import ProductManager from "./ProductManager.js";
 
-const path ='./src/models/carts.json';
+const path ='./src/Dao/models/carts.json';
 const productManager = new ProductManager();
 
 export default class CartManager {

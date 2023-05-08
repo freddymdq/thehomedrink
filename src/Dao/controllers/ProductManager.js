@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const path ='./src/models/products.json';
+const path ='./src/Dao/files/products.json'
 
 export default class ProductManager {
     getProducts = async ()=>{
