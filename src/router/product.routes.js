@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/', async (req, res)=>{
     try{
-        await accesManager.createRecord('GET PROD');
+        await accesManager.createRecord('MOSTRAR PRODUCTOS');
         const result = await productModel.find();
         res.status(200).send({result});
     }catch (error) {
@@ -21,7 +21,7 @@ router.get('/', async (req, res)=>{
 router.get('/:id', async (req, res)=>{
     try{
        
-        await accesManager.createRecord('GET PROD BY ID');
+        await accesManager.createRecord('MOSTRAR PRODUCTO POR ID');
         const id = req.params.pid;
         const result = await productModel.find({_id:id});
         res.status(200).send({result});
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res)=>{
 router.post('/' , async (req, res)=>{
     try{
         
-        await accesManager.createRecord('NEW PROD CREATE');
+        await accesManager.createRecord('PRODUCTO CREADO');
         const {title, description, price,category, img, code, stock} = req.body;
         if (!title || !description || !price || !category || !img || !code || !stock){
             return res.status(400).send({error: 'Faltan datos'});
@@ -53,7 +53,7 @@ router.post('/' , async (req, res)=>{
 router.delete('/:id', async (req, res) => {
     try {
        
-        await accesManager.createRecord('PROD DELETE');
+        await accesManager.createRecord('PRODUCTO BORRADO');
         const id = req.params.id;
         const result = await productModel.deleteOne({_id:id});
         res.status(200).send({result});
@@ -67,7 +67,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res)=>{
     try{
         
-        await accesManager.createRecord('PROD UPDATE');
+        await accesManager.createRecord('ACTUALIZACION DEL PRODUCTO');
         const id = req.params.id;
         const updateProduct = req.body;
         const result = await productModel.updateOne({_id: id}, {$set: updateProduct});

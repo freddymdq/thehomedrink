@@ -9,7 +9,7 @@ const router = Router();
 // Crea cart
 router.post('/', async (req, res)=>{
     try {
-        await accesManager.createRecord('CART CREATE');
+        await accesManager.createRecord('CARRITO CREADO');
         const cart = await cartModel.create({products: []});
         res.status(200).send(cart);
     } catch (error) {
@@ -23,7 +23,7 @@ router.post('/', async (req, res)=>{
 // muestra los carts
 router.get('/', async (req, res) => {
   try {
-    await accesManager.createRecord('GET ALL CARTS');
+    await accesManager.createRecord('TODOS LOS CARRITOS');
     const carts = await cartModel.find();
     res.status(200).send(carts);
   } catch (error) {
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 // muestra un carrito por su ID
 router.get('/:id', async (req, res) => {
   try {
-    await accesManager.createRecord(`GET CART BY ID: ${req.params.id}`);
+    await accesManager.createRecord(`ID DEL CARRITO: ${req.params.id}`);
     const cart = await cartModel.findById(req.params.id);
     res.status(200).send(cart);
   } catch (error) {
@@ -48,13 +48,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-
-
-// Delete a cart
+// borrar carrito
 router.delete('/:id', async (req, res)=>{
     try {
-        await accesManager.createRecord('CART DELETE');
+        await accesManager.createRecord('CARRITO BORRADO');
         const id = req.params.id;
         const result = await cartModel.deleteOne({_id: id});
         res.status(200).send(result);
@@ -67,12 +64,12 @@ router.delete('/:id', async (req, res)=>{
 });
 
 //agrega al carrito
+
 router.post('/:cartId/product/:productId', async (req, res) => {
   try {
     const cartId = req.params.cartId;
     const productId = req.params.productId;
     const quantity = req.body.quantity || 1;
-
     const product = await ProductModel.findById(productId);
     if (!product) {
       return res.status(404).send({
@@ -80,7 +77,7 @@ router.post('/:cartId/product/:productId', async (req, res) => {
         msg: "Producto no encontrado"
       });
     }
-
+    
     const cart = await cartModel.findById(cartId);
     if (!cart) {
       return res.status(404).send({
@@ -99,6 +96,7 @@ router.post('/:cartId/product/:productId', async (req, res) => {
       cart.products.push({ product: productId, quantity: quantity });
     }
 
+    await accesManager.createRecord(`PRODUCTO CON ID: ${productId} FUE AGREGADO AL CART CON ID: ${cartId}`);
     await cart.save();
     res.status(200).send(cart);
   } catch (error) {
@@ -109,13 +107,14 @@ router.post('/:cartId/product/:productId', async (req, res) => {
   }
 });
 
-// elimina un producto del carrito si hhay mas de 1 elimina en cantidad
+// Eliminar producto del carrito
 router.delete('/:cartId/product/:productId', async (req, res) => {
   try {
     const cartId = req.params.cartId;
     const productId = req.params.productId;
-
+    const quantity = req.body.quantity || 1;
     const cart = await cartModel.findById(cartId);
+
     if (!cart) {
       return res.status(404).send({
         status: "Error",
@@ -123,25 +122,25 @@ router.delete('/:cartId/product/:productId', async (req, res) => {
       });
     }
 
-    const existingProduct = cart.products.find(
+    const existingProductIndex = cart.products.findIndex(
       (p) => p.product.toString() === productId
     );
 
-    if (!existingProduct) {
+    if (existingProductIndex >= 0) {
+      const existingProduct = cart.products[existingProductIndex];
+      if (existingProduct.quantity > quantity) {
+        existingProduct.quantity -= quantity;
+      } else {
+        cart.products.splice(existingProductIndex, 1);
+      }
+    } else {
       return res.status(404).send({
         status: "Error",
         msg: "Producto no encontrado en el carrito"
       });
     }
 
-    if (existingProduct.quantity > 1) {
-      existingProduct.quantity -= 1;
-    } else {
-      cart.products = cart.products.filter(
-        (p) => p.product.toString() !== productId
-      );
-    }
-
+    await accesManager.createRecord(`SE BORRO UNA UNIDAD DEL PRODUCTO: ${productId} DEL CARRITO: ${cartId}`);
     await cart.save();
     res.status(200).send(cart);
   } catch (error) {

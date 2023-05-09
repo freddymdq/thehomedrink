@@ -5,12 +5,12 @@ const collection = 'Messages'
 const schema = new mongoose.Schema({
     user:{
         type: String,
-        require: true,
-        unique: true
+        required: true,
+        index: true
     },
     message:{
         type: String,
-        require: true
+        required: true
     }
 });
 

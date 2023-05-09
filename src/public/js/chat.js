@@ -1,7 +1,7 @@
 const socket = io();
     let user;
 const chatbox = document.getElementById('chatbox');
-chatbox.addEventListener('keydown', evt =>{
+chatbox.addEventListener('keyup', evt =>{
     if(evt.key === "Enter"){
         if(chatbox.value.trim().length>0){
             socket.emit('message', {user:user, message:chatbox.value.trim()})

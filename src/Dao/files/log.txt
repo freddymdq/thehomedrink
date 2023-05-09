@@ -1,87 +1,16 @@
-
-Fecha: 8/5/2023 - Hora: 10:18:13 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 10:29:47 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 11:01:30 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 11:42:05 - Metodo: NEW PRODUCT CREATED
-Fecha: 8/5/2023 - Hora: 11:42:30 - Metodo: DELETE PRODUCT
-Fecha: 8/5/2023 - Hora: 11:55:17 - Metodo: DELETE PRODUCT
-Fecha: 8/5/2023 - Hora: 11:55:53 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 11:56:53 - Metodo: GET PRODUCT BY ID
-Fecha: 8/5/2023 - Hora: 11:57:55 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:12:51 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:13:27 - Metodo: REMOVED PRODUCT
-Fecha: 8/5/2023 - Hora: 12:13:39 - Metodo: GET PRODUCT BY ID
-Fecha: 8/5/2023 - Hora: 12:13:46 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:13:55 - Metodo: NEW PRODUCT CREATED
-Fecha: 8/5/2023 - Hora: 12:14:18 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:14:37 - Metodo: REMOVED PRODUCT
-Fecha: 8/5/2023 - Hora: 12:15:29 - Metodo: GET PRODUCT BY ID
-Fecha: 8/5/2023 - Hora: 12:15:31 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:15:41 - Metodo: NEW PRODUCT CREATED
-Fecha: 8/5/2023 - Hora: 12:16:36 - Metodo: GET PRODUCT BY ID
-Fecha: 8/5/2023 - Hora: 12:16:44 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:17:17 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:17:35 - Metodo: REMOVED PRODUCT
-Fecha: 8/5/2023 - Hora: 12:18:58 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:19:04 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 12:19:12 - Metodo: NEW PRODUCT CREATED
-Fecha: 8/5/2023 - Hora: 12:19:24 - Metodo: UPDATE PRODUCT
-Fecha: 8/5/2023 - Hora: 12:19:35 - Metodo: GET PRODUCT BY ID
-Fecha: 8/5/2023 - Hora: 12:20:13 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 13:39:22 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 13:44:38 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 13:52:05 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 13:58:40 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:00:26 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:00:39 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:01:07 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:01:23 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:02:11 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:05:35 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 14:16:31 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 15:58:03 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 18:04:34 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 18:23:14 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 18:23:25 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 21:04:06 - Metodo: POST CART
-Fecha: 8/5/2023 - Hora: 21:04:59 - Metodo: GET CARTS
-Fecha: 8/5/2023 - Hora: 21:27:21 - Metodo: GET PRODUCTS
-Fecha: 8/5/2023 - Hora: 21:27:30 - Metodo: GET PRODUCTS
-Fecha: 9/5/2023 - Hora: 10:22:06 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:22:59 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:23:46 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:23:51 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:24:42 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:25:11 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:25:29 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:25:49 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:26:38 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:26:55 - Metodo: GET PROD
-Fecha: 9/5/2023 - Hora: 10:27:32 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:27:48 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:28:17 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:29:01 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:29:26 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 10:29:56 - Metodo: NEW PROD CREATE
-Fecha: 9/5/2023 - Hora: 11:04:45 - Metodo: CART CREATE
-Fecha: 9/5/2023 - Hora: 11:05:30 - Metodo: GET PRODUCTS
-Fecha: 9/5/2023 - Hora: 11:10:07 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:10:20 - Metodo: CART DELETE
-Fecha: 9/5/2023 - Hora: 11:10:29 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:10:39 - Metodo: CART CREATE
-Fecha: 9/5/2023 - Hora: 11:35:08 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:35:43 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:36:13 - Metodo: CART DELETE
-Fecha: 9/5/2023 - Hora: 11:36:21 - Metodo: CART CREATE
-Fecha: 9/5/2023 - Hora: 11:42:55 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:42:58 - Metodo: GET CART BY ID: 645a5a6542766f7ec1d882a4
-Fecha: 9/5/2023 - Hora: 11:43:05 - Metodo: CART DELETE
-Fecha: 9/5/2023 - Hora: 11:57:56 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 11:58:00 - Metodo: CART CREATE
-Fecha: 9/5/2023 - Hora: 11:58:12 - Metodo: GET CART BY ID: 645a5f78ea63dcf8a047cb89
-Fecha: 9/5/2023 - Hora: 12:24:05 - Metodo: GET ALL CARTS
-Fecha: 9/5/2023 - Hora: 12:24:15 - Metodo: GET CART BY ID: 645a5f78ea63dcf8a047cb89
-Fecha: 9/5/2023 - Hora: 12:37:04 - Metodo: GET CART BY ID: 645a5f78ea63dcf8a047cb89
-Fecha: 9/5/2023 - Hora: 12:39:58 - Metodo: CART DELETE
-Fecha: 9/5/2023 - Hora: 12:40:07 - Metodo: CART CREATE
-Fecha: 9/5/2023 - Hora: 12:40:16 - Metodo: GET CART BY ID: 645a6957a55cfc4324988de6
+Fecha: 9/5/2023 - Hora: 13:42:37 - Metodo: CARRITO BORRADO
+Fecha: 9/5/2023 - Hora: 13:42:53 - Metodo: CARRITO CREADO
+Fecha: 9/5/2023 - Hora: 13:43:10 - Metodo: ID DEL CARRITO: 645a780dc3f7ec4565e33c38
+Fecha: 9/5/2023 - Hora: 13:43:20 - Metodo: CARRITO BORRADO
+Fecha: 9/5/2023 - Hora: 13:43:27 - Metodo: CARRITO CREADO
+Fecha: 9/5/2023 - Hora: 13:44:01 - Metodo: ID DEL CARRITO: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:08 - Metodo: ID DEL CARRITO: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:22 - Metodo: PRODUCTO CON ID: 645a49332fbde229e86b87e2 FUE AGREGADO AL CART CON ID: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:28 - Metodo: PRODUCTO CON ID: 645a49332fbde229e86b87e2 FUE AGREGADO AL CART CON ID: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:30 - Metodo: PRODUCTO CON ID: 645a49332fbde229e86b87e2 FUE AGREGADO AL CART CON ID: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:31 - Metodo: PRODUCTO CON ID: 645a49332fbde229e86b87e2 FUE AGREGADO AL CART CON ID: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:46 - Metodo: SE BORRO UNA UNIDAD DEL PRODUCTO: 645a49332fbde229e86b87e2 DEL CARRITO: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:48 - Metodo: SE BORRO UNA UNIDAD DEL PRODUCTO: 645a49332fbde229e86b87e2 DEL CARRITO: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:44:58 - Metodo: ID DEL CARRITO: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:45:32 - Metodo: PRODUCTO CON ID: 645a4a442fbde229e86b87ed FUE AGREGADO AL CART CON ID: 645a782fc3f7ec4565e33c3c
+Fecha: 9/5/2023 - Hora: 13:45:55 - Metodo: ID DEL CARRITO: 645a782fc3f7ec4565e33c3c
