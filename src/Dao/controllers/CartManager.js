@@ -34,6 +34,14 @@ export default class CartManager {
         }
             return cart;
     };
+    
+    /* addProductToCart = async(idCart, idProduct) =>{
+    const product = product.findOne({_id: idProduct})
+    if (!product) return 'El Producto con ese id no existe'
+    const cartUpdate = await CartManager.updateOne({_id: idCart}, {$push:{products:product}})
+    return cartUpdate 
+
+    } */
     addProductToCart = async (cid, pid) => {
             const carts = await this.getCarts();
             const cartIndex = carts.findIndex((cart) => cart.cid === cid);  

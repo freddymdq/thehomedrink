@@ -3,7 +3,6 @@ import handlebars from "express-handlebars";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
 import __dirname from "./utils.js";
-import ProductManager from "./Dao/controllers/ProductManager.js";
 import viewsRouter from "./router/views.routes.js";
 import chatRouter from "./router/chat.routes.js"
 import cartRouter from "./router/cart.routes.js"
@@ -18,7 +17,7 @@ const server = app.listen(PORT, ()=>{
     console.log('Servidor funcionando en el puerto: '+PORT);
 })
 
-const MONGO = "mongodb+srv://freddymdq:federico@cluster0.wm7ahcr.mongodb.net/?retryWrites=true&w=majority"
+const MONGO = "mongodb+srv://freddymdq:federico@cluster0.wm7ahcr.mongodb.net/ecommerce?retryWrites=true&w=majority"
 const connect = mongoose.connect(MONGO);
 
 
@@ -38,19 +37,20 @@ app.use('/api/chat', chatRouter)
 app.use('/api/products/', productRouter);
 app.use('/api/carts/', cartRouter);
 
-const io = new Server(server);
-const messages = [];
+const io = new Server(server)
+const messages = []
 
 io.on('connection', socket => {
-    console.log('socket connected');
+    console.log('socket connected')
   
-    socket.emit('messageLogs', messages);
+    socket.emit('messageLogs', messages)
   
     socket.on('message', async data => {
-        messages.push(data);  
-        io.emit('messageLogs', messages);
+        // Pusheamos un mensaje a un arrays para mostrarlo por handlebars. 
+        messages.push(data)  
+        io.emit('messageLogs', messages)
         // Crear un nuevo documento en la base de datos
-        await messagesModel.create({ user: data.user, message: data.message });
+        await messagesModel.create({ user: data.user, message: data.message })
       });
   
     socket.on('authenticated', data => {

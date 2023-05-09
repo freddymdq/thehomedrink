@@ -40,7 +40,7 @@ Swal.fire({
         if (!user) return;
     let log = document.getElementById('messageLogs');
     let messages = "";
-        if (Array.isArray(data)) {
+    if (Array.isArray(data)) {
       data.forEach(message => {
         messages += `${message.user} : ${message.message} <br/>  `
       });
@@ -50,7 +50,7 @@ Swal.fire({
 
   // Evento que muestra un mensaje de bienvenida cuando un usuario nuevo se conecta
   socket.on('newUserConnected', data => {
-        if (!user) return;
+    if (!user) return;
     Swal.fire({
       toast: true,
       position: 'top-end',

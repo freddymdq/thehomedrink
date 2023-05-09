@@ -2,6 +2,7 @@ import { Router } from "express";
 import AccesManager from "../Dao/controllers/AccesManager.js";
 import productModel from "../Dao/models/products.model.js";
 
+
 const router = Router();
 const accesManager = new AccesManager()
 
@@ -29,7 +30,12 @@ router.get('/', async (req, res)=>{
         });
     }
 });
-
+/* 
+router.get('/api/chat', async (req, res) => {
+  const messages = await messagesModel.find();
+  res.render('chat', { messages });
+});
+ */
 
 
 export default router;

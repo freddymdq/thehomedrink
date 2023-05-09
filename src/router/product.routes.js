@@ -1,15 +1,14 @@
 import { Router } from "express";
 import AccesManager from "../Dao/controllers/AccesManager.js";
 import productModel from "../Dao/models/products.model.js";
-
+import cartModel from "../Dao/models/cart.model.js";
 
 const accesManager = new AccesManager();
 const router = Router();
 
-
 router.get('/', async (req, res)=>{
     try{
-        await accesManager.createRecord('GET PRODUCTS');
+        await accesManager.createRecord('GET PROD');
         const result = await productModel.find();
         res.status(200).send({result});
     }catch (error) {
@@ -22,7 +21,7 @@ router.get('/', async (req, res)=>{
 router.get('/:id', async (req, res)=>{
     try{
        
-        await accesManager.createRecord('GET PRODUCT BY ID');
+        await accesManager.createRecord('GET PROD BY ID');
         const id = req.params.pid;
         const result = await productModel.find({_id:id});
         res.status(200).send({result});
@@ -36,12 +35,12 @@ router.get('/:id', async (req, res)=>{
 router.post('/' , async (req, res)=>{
     try{
         
-        await accesManager.createRecord('NEW PRODUCT CREATED');
+        await accesManager.createRecord('NEW PROD CREATE');
         const {title, description, price,category, img, code, stock} = req.body;
         if (!title || !description || !price || !category || !img || !code || !stock){
-            return res.status(400).send({error: 'Datos incompletos'});
+            return res.status(400).send({error: 'Faltan datos'});
         }
-        const product = {title, description, price,category, img, code, stock};
+        const product = {title, description, price, category, img, code, stock};
         const result = await productModel.create(product);
         res.status(200).send({result});
     }catch (error){
@@ -54,7 +53,7 @@ router.post('/' , async (req, res)=>{
 router.delete('/:id', async (req, res) => {
     try {
        
-        await accesManager.createRecord('REMOVED PRODUCT');
+        await accesManager.createRecord('PROD DELETE');
         const id = req.params.id;
         const result = await productModel.deleteOne({_id:id});
         res.status(200).send({result});
@@ -68,7 +67,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res)=>{
     try{
         
-        await accesManager.createRecord('UPDATE PRODUCT');
+        await accesManager.createRecord('PROD UPDATE');
         const id = req.params.id;
         const updateProduct = req.body;
         const result = await productModel.updateOne({_id: id}, {$set: updateProduct});
@@ -80,5 +79,7 @@ router.put('/:id', async (req, res)=>{
         });
     }
 });
+
 export default router;
+
 

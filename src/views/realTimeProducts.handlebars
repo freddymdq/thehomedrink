@@ -4,48 +4,39 @@
     <form action="/api/products" method="post">
         <label>Titulo</label>
         <input name="title" id="title">
-        <br/>
-        <br/>
+            <br/>
         <label>Descripcion</label>
         <input name="description" id="description">
-        <br/>
-        <br/>
+            <br/>
         <label>Precio</label>
         <input name="price" type="number" id="price">
-        <br/>
-        <br/>
+            <br/>
         <label>Foto</label>
         <input name="img" id="img">
-        <br/>
-        <br/>
+            <br/>
         <label>Codigo</label>
         <input name="code" id="code">
-        <br/>
-        <br/>
+            <br/>
         <label>Stock</label>
         <input name="stock" id="stock">
-        <br/>
-        <br/>
+            <br/>
     </form>
     </div>
-    <input type="button" id="addProd" value="AGREGAR PRODUCTO">
+        <input type="button" id="addProd" value="AGREGAR PRODUCTO">
     <div >
         <h3>ELIMINAR PRODUCTO</h3>
         <form action="">
             <label>Ingrese el ID del producto a eliminar</label>
             <input name="pid" id="pid" placeholder="PROD11">
-            <br/>
-            <br/>
+                <br/>
         </form>
             <input type="button" id="deletProd" value="ELIMINAR PRODUCTO">
     </div>
     <div>
         <h3>LISTA DE PRODUCTOS</h3>
-        
-            <p id="productList"></p>
-        
+        <p id="productList"></p>
     </div>
-</div>
+    </div>
   </div>
 </div>
 <script src="/socket.io/socket.io.js"></script>
