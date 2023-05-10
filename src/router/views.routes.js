@@ -2,15 +2,13 @@ import { Router } from "express";
 import AccesManager from "../Dao/controllers/AccesManager.js";
 import productModel from "../Dao/models/products.model.js";
 
-
 const router = Router();
 const accesManager = new AccesManager()
 
 router.get('/realTimeProducts', async (req, res) => {
 try {
-    //Antes
-    /* let allProducts = await productManager.getProducts()
-    res.render('realTimeProducts', {allProducts}); */
+    let allProducts = await productManager.getProducts()
+        res.render('realTimeProducts', {allProducts}); 
 } catch (error) {
     res.status(400).send({
     status: "Error",
@@ -30,12 +28,5 @@ router.get('/', async (req, res)=>{
         });
     }
 });
-/* 
-router.get('/api/chat', async (req, res) => {
-  const messages = await messagesModel.find();
-  res.render('chat', { messages });
-});
- */
-
 
 export default router;
